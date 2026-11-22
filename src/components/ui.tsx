@@ -94,7 +94,7 @@ export function BrandMark({ size = "md" }: { size?: "sm" | "md" }) {
       alt="Fábrica Da Impressão 3D"
       width={44}
       height={44}
-      className={`${box} shrink-0 object-contain drop-shadow-[0_2px_10px_rgba(255,107,0,0.35)]`}
+      className={`${box} shrink-0 rounded-[10px] object-cover ring-1 ring-white/10`}
     />
   );
 }
