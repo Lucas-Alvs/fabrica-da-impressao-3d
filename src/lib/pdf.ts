@@ -8,6 +8,7 @@
 
 import { PDFDocument, PDFFont, PDFPage, StandardFonts, rgb, type RGB } from "pdf-lib";
 import { dateBR, hoursLabel, num } from "./format";
+import { LOGO_PNG_BASE64 } from "./logo-asset";
 import type { Quote, Settings } from "./types";
 
 const ORANGE = rgb(1, 0.42, 0);
@@ -31,21 +32,10 @@ const money = (value: number) =>
 
 type Fonts = { regular: PDFFont; bold: PDFFont };
 
-/** Desenha o logotipo (marca em laranja + nome da empresa). */
-function drawLogo(page: PDFPage, x: number, y: number, fonts: Fonts, companyName: string) {
-  const size = 34;
-  page.drawRectangle({ x, y, width: size, height: size, color: ORANGE });
-  page.drawRectangle({ x: x + 6, y: y + 6, width: size - 12, height: size - 12, borderColor: WHITE, borderWidth: 1.5 });
-  const companyInitials = "F3D";
-  const text = companyInitials;
-  const width = fonts.bold.widthOfTextAtSize(text, 13);
-  page.drawText(text, {
-    x: x + (size - width) / 2,
-    y: y + size / 2 - 4.5,
-    size: 13,
-    font: fonts.bold,
-    color: INK
-  });
+/** Desenha a logo da marca (cubo 3D) no cabeçalho. */
+async function drawLogo(doc: PDFDocument, page: PDFPage, x: number, y: number, size = 38) {
+  const logo = await doc.embedPng(Buffer.from(LOGO_PNG_BASE64, "base64"));
+  page.drawImage(logo, { x, y, width: size, height: size });
 }
 
 function label(page: PDFPage, text: string, x: number, y: number, fonts: Fonts, color: RGB = GRAY) {
@@ -88,12 +78,12 @@ export async function buildQuotePdf(quote: Quote, settings: Settings): Promise<U
   page.drawRectangle({ x: 0, y: PAGE_H - 132, width: PAGE_W, height: 132, color: INK });
   page.drawRectangle({ x: 0, y: PAGE_H - 132, width: PAGE_W, height: 4, color: ORANGE });
 
-  drawLogo(page, MARGIN, PAGE_H - 82, fonts, company);
-  text(page, truncate(company.toUpperCase(), 34), MARGIN + 46, PAGE_H - 56, 14, fonts, true, WHITE);
-  text(page, "IMPRESSÃO 3D  •  PROTOTIPAGEM  •  PRODUÇÃO", MARGIN + 46, PAGE_H - 72, 7.5, fonts, false, rgb(0.72, 0.72, 0.72));
+  await drawLogo(doc, page, MARGIN, PAGE_H - 84, 38);
+  text(page, truncate(company.toUpperCase(), 34), MARGIN + 50, PAGE_H - 56, 14, fonts, true, WHITE);
+  text(page, "IMPRESSÃO 3D  •  PROTOTIPAGEM  •  PRODUÇÃO", MARGIN + 50, PAGE_H - 72, 7.5, fonts, false, rgb(0.72, 0.72, 0.72));
   if (settings.company_phone || settings.company_email) {
     const contact = [settings.company_phone, settings.company_email].filter(Boolean).join("  |  ");
-    text(page, contact, MARGIN + 46, PAGE_H - 88, 7.5, fonts, false, rgb(0.72, 0.72, 0.72));
+    text(page, contact, MARGIN + 50, PAGE_H - 88, 7.5, fonts, false, rgb(0.72, 0.72, 0.72));
   }
 
   const titleWidth = fonts.bold.widthOfTextAtSize("ORÇAMENTO", 22);

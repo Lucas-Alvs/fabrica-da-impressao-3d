@@ -86,11 +86,16 @@ export function BatchBadge() {
 }
 
 export function BrandMark({ size = "md" }: { size?: "sm" | "md" }) {
-  const box = size === "sm" ? "h-9 w-9 text-[11px]" : "h-11 w-11 text-xs";
+  const box = size === "sm" ? "h-9 w-9" : "h-11 w-11";
   return (
-    <div className={`${box} grid place-items-center rounded-xl bg-brand font-extrabold text-ink shadow-glow`}>
-      F3D
-    </div>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/logo-mark.png"
+      alt="Fábrica Da Impressão 3D"
+      width={44}
+      height={44}
+      className={`${box} shrink-0 object-contain drop-shadow-[0_2px_10px_rgba(255,107,0,0.35)]`}
+    />
   );
 }
 
