@@ -9,6 +9,7 @@
 import { PDFDocument, PDFFont, PDFPage, StandardFonts, rgb, type RGB } from "pdf-lib";
 import { dateBR, hoursLabel, num } from "./format";
 import { LOGO_PNG_BASE64 } from "./logo-asset";
+import { SEAL_PNG_BASE64 } from "./seal-asset";
 import type { Quote, Settings } from "./types";
 
 const ORANGE = rgb(1, 0.42, 0);
@@ -36,6 +37,12 @@ type Fonts = { regular: PDFFont; bold: PDFFont };
 async function drawLogo(doc: PDFDocument, page: PDFPage, x: number, y: number, size = 38) {
   const logo = await doc.embedPng(Buffer.from(LOGO_PNG_BASE64, "base64"));
   page.drawImage(logo, { x, y, width: size, height: size });
+}
+
+/** Desenha o selo redondo da marca (versão circular da logo). */
+async function drawSeal(doc: PDFDocument, page: PDFPage, x: number, y: number, size = 40) {
+  const seal = await doc.embedPng(Buffer.from(SEAL_PNG_BASE64, "base64"));
+  page.drawImage(seal, { x, y, width: size, height: size });
 }
 
 function label(page: PDFPage, text: string, x: number, y: number, fonts: Fonts, color: RGB = GRAY) {
@@ -186,6 +193,9 @@ export async function buildQuotePdf(quote: Quote, settings: Settings): Promise<U
   const totalBoxY = y - 150;
   page.drawRectangle({ x: totalBoxX, y: totalBoxY, width: totalBoxW, height: 150, color: INK });
   page.drawRectangle({ x: totalBoxX, y: totalBoxY + 150 - 4, width: totalBoxW, height: 4, color: ORANGE });
+
+  const sealSize = 40;
+  await drawSeal(doc, page, totalBoxX + totalBoxW - 14 - sealSize, totalBoxY + 96, sealSize);
 
   label(page, "Valor total", totalBoxX + 14, totalBoxY + 112, fonts, rgb(0.7, 0.7, 0.7));
   const totalText = money(quote.total);
