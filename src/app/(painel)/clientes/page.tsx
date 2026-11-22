@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ClientsManager from "@/components/ClientsManager";
-import { EmptyState, SectionCard } from "@/components/ui";
+import { SectionCard } from "@/components/ui";
 import { listClients, listQuotes } from "@/lib/repo";
 
 export const dynamic = "force-dynamic";
@@ -53,18 +53,7 @@ export default async function ClientesPage({
           </div>
         </form>
 
-        {clients.length === 0 ? (
-          <EmptyState
-            title={q ? "Nenhum cliente encontrado" : "Nenhum cliente cadastrado"}
-            description={
-              q
-                ? "Tente outro nome, telefone ou empresa."
-                : "Cadastre um cliente para vincular orçamentos e acompanhar o histórico."
-            }
-          />
-        ) : (
-          <ClientsManager clients={clients} quoteCounts={stats} />
-        )}
+        <ClientsManager clients={clients} quoteCounts={stats} searching={Boolean(q)} />
       </SectionCard>
     </div>
   );

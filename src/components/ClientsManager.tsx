@@ -12,9 +12,10 @@ type FormValues = { name: string; phone: string; email: string; company: string 
 type Props = {
   clients: Client[];
   quoteCounts: Record<number, { count: number; total: number; last: string | null }>;
+  searching?: boolean;
 };
 
-export default function ClientsManager({ clients, quoteCounts }: Props) {
+export default function ClientsManager({ clients, quoteCounts, searching = false }: Props) {
   const router = useRouter();
   const [editing, setEditing] = useState<Client | null>(null);
   const [open, setOpen] = useState(false);
@@ -81,6 +82,18 @@ export default function ClientsManager({ clients, quoteCounts }: Props) {
         </button>
       </div>
 
+      {clients.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-ink/15 bg-cloud/50 px-6 py-8 text-center">
+          <p className="text-sm font-bold text-ink">
+            {searching ? "Nenhum cliente encontrado" : "Nenhum cliente cadastrado"}
+          </p>
+          <p className="mx-auto mt-1 max-w-sm text-xs font-medium text-ink/65">
+            {searching
+              ? "Tente outro nome, telefone ou empresa."
+              : "Clique em “+ Novo cliente” para fazer o primeiro cadastro."}
+          </p>
+        </div>
+      ) : (
       <div className="-mx-4 overflow-x-auto sm:mx-0">
         <table className="w-full min-w-[760px] border-collapse text-sm">
           <thead className="table-head">
@@ -135,6 +148,7 @@ export default function ClientsManager({ clients, quoteCounts }: Props) {
           </tbody>
         </table>
       </div>
+      )}
 
       {open ? (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/60 p-0 backdrop-blur-sm sm:items-center sm:p-4">
