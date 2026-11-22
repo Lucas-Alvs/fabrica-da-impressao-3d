@@ -32,5 +32,8 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
+  // Runtime Node.js: exigido em produção por alguns alvos de deploy
+  // (o runtime Edge do middleware está sendo descontinuado).
+  runtime: "nodejs",
   matcher: ["/dashboard/:path*", "/clientes/:path*", "/materiais/:path*", "/orcamentos/:path*", "/configuracoes/:path*", "/login"]
 };
