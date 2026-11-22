@@ -81,16 +81,6 @@ npm run start      # servir o build
 npm run typecheck  # checagem de tipos
 ```
 
-## Login inicial
-
-| Campo | Valor padrão |
-| --- | --- |
-| E-mail | `admin@fabrica3d.com` (ou o valor de `ADMIN_EMAIL`) |
-| Senha | `fabrica123` (ou o valor de `ADMIN_PASSWORD`) |
-
-No primeiro login a senha inicial é convertida em hash e gravada no banco.
-Depois disso, altere em **Configurações → Segurança → Alterar senha**.
-
 ## Como o cálculo funciona
 
 Todas as fórmulas ficam em `src/lib/calc.ts` (funções puras, usadas no navegador e no servidor —
