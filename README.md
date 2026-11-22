@@ -183,6 +183,9 @@ O banco é escolhido por `DATABASE_URL`:
 As tabelas (`settings`, `batch_tiers`, `clients`, `materials`, `quotes`, `audit_logs`) são criadas e
 semeadas automaticamente na primeira requisição. Não é necessário rodar migrações.
 
+As consultas usam `?` como marcador (convertido para `$1..$n` no PostgreSQL) e não usam recursos
+exclusivos de um banco — por exemplo, a ordenação por nome usa `LOWER(nome)`, que funciona nos dois.
+
 > Em hospedagem serverless o sistema de arquivos é somente leitura — por isso **em produção use
 > PostgreSQL** (o plano gratuito da Neon ou do Supabase é suficiente para começar).
 
@@ -204,16 +207,50 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 ## Deploy na Vercel
 
-1. Envie o projeto para um repositório no GitHub.
-2. Crie um banco PostgreSQL gratuito (ex.: [Neon](https://neon.tech)) e copie a connection string.
-3. Na Vercel: **Add New → Project → importe o repositório** (framework detectado: Next.js).
-4. Em **Settings → Environment Variables**, cadastre:
-   - `DATABASE_URL` (a string do PostgreSQL, com `?sslmode=require`)
-   - `AUTH_SECRET`
-   - `ADMIN_EMAIL`
-   - `ADMIN_PASSWORD`
-5. **Deploy**. A primeira requisição cria as tabelas automaticamente.
-6. Acesse `/login`, entre e troque a senha em **Configurações → Segurança**.
+O caminho PostgreSQL foi testado com um PostgreSQL 18 real rodando o build de produção
+(`next build` + `next start`) e todas as rotas: login, painel, orçamentos (criar, editar,
+duplicar, excluir), clientes, materiais, configurações, backup e PDF.
+
+### 1. Criar o banco na nuvem (Neon, gratuito)
+
+1. Acesse [neon.tech](https://neon.tech), crie a conta e um projeto (região mais próxima, ex.: São Paulo).
+2. No painel do projeto, abra **Connect** / **Connection string** e copie a string completa,
+   que começa com `postgresql://`. Ela já vem com `?sslmode=require`.
+3. Guarde essa string: é o valor de `DATABASE_URL`.
+
+> Supabase, Railway e RDS também funcionam: qualquer `postgresql://` serve, desde que aceite SSL.
+
+### 2. Publicar na Vercel
+
+1. Na Vercel: **Add New → Project → Import Git Repository** e escolha este repositório
+   (framework detectado: Next.js; não altere build/output).
+2. Em **Settings → Environment Variables**, cadastre (marque Production, Preview e Development):
+
+   | Variável | Valor |
+   | --- | --- |
+   | `DATABASE_URL` | a string `postgresql://...` do passo 1 |
+   | `AUTH_SECRET` | segredo aleatório longo (veja o comando abaixo) |
+   | `ADMIN_EMAIL` | seu e-mail de acesso |
+   | `ADMIN_PASSWORD` | senha inicial forte |
+
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+   ```
+
+3. **Deploy**. A primeira requisição cria as tabelas e os dados padrão automaticamente
+   (o schema usa advisory lock, então várias instâncias podem inicializar ao mesmo tempo sem duplicar dados).
+4. Acesse `/login`, entre com `ADMIN_EMAIL` / `ADMIN_PASSWORD` e troque a senha em
+   **Configurações → Segurança**.
+
+### 3. Se algo falhar
+
+- **Erro de conexão / `ECONNREFUSED`**: confira se `DATABASE_URL` foi cadastrada em *todos* os
+  ambientes e se a string tem `?sslmode=require`. Depois de mudar variáveis, é preciso **Redeploy**.
+- **`self-signed certificate`**: já tratado pelo app (SSL sem validação de CA para hosts remotos).
+- **Página em branco ou 500 nas rotas**: veja **Deployments → Functions → Logs** na Vercel.
+- **Esqueceu a senha**: altere `ADMIN_PASSWORD` na Vercel e faça um novo deploy; o hash antigo salvo
+  no banco continua valendo, então em último caso atualize `settings.admin_password_hash` para `NULL`
+  no banco (o sistema volta a usar `ADMIN_PASSWORD`).
 
 ## Deploy na Netlify
 

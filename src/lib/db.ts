@@ -11,7 +11,15 @@
 
 export type Row = Record<string, unknown>;
 
-type PgPool = { query: (text: string, values?: unknown[]) => Promise<{ rows: Row[] }> };
+type PgResult = { rows: Row[] };
+type PgClient = {
+  query: (text: string, values?: unknown[]) => Promise<PgResult>;
+  release: () => void;
+};
+type PgPool = {
+  query: (text: string, values?: unknown[]) => Promise<PgResult>;
+  connect: () => Promise<PgClient>;
+};
 type SqliteDb = {
   exec: (sql: string) => void;
   prepare: (sql: string) => {
@@ -205,23 +213,55 @@ function schema(): string[] {
 /** Cria as tabelas e insere os dados padrão (idempotente). */
 export async function ensureDb(): Promise<void> {
   if (!ready) {
-    ready = (async () => {
-      for (const statement of schema()) {
-        if (isPostgres()) {
-          const pool = await getPg();
-          await pool.query(statement);
-        } else {
-          const db = await getSqlite();
-          db.exec(statement);
-        }
-      }
-      await seedDefaults();
-    })().catch((error) => {
+    ready = createSchemaAndSeed().catch((error) => {
       ready = null;
       throw error;
     });
   }
   return ready;
+}
+
+/** Erros esperados quando duas instâncias criam o schema ao mesmo tempo. */
+function isAlreadyThere(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error);
+  return /already exists|duplicate key value violates unique constraint/i.test(message);
+}
+
+async function createSchemaAndSeed(): Promise<void> {
+  if (!isPostgres()) {
+    const db = await getSqlite();
+    for (const statement of schema()) db.exec(statement);
+    await seedDefaults();
+    return;
+  }
+
+  // Em produção (serverless) várias instâncias podem inicializar juntas.
+  // O lock de sessão evita CREATE TABLE/seed duplicados; se o banco não
+  // suportar advisory locks, seguimos sem ele.
+  const pool = await getPg();
+  const client = await pool.connect();
+  let locked = false;
+  try {
+    try {
+      await client.query("SELECT pg_advisory_lock(918273645)");
+      locked = true;
+    } catch {
+      locked = false;
+    }
+    for (const statement of schema()) {
+      try {
+        await client.query(statement);
+      } catch (error) {
+        if (!isAlreadyThere(error)) throw error;
+      }
+    }
+    await seedDefaults();
+  } finally {
+    if (locked) {
+      await client.query("SELECT pg_advisory_unlock(918273645)").catch(() => undefined);
+    }
+    client.release();
+  }
 }
 
 async function seedDefaults(): Promise<void> {

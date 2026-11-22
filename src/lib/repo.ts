@@ -54,7 +54,7 @@ export async function listClients(search = ""): Promise<Client[]> {
     `SELECT * FROM clients
      WHERE ? = '%%' OR LOWER(name) LIKE ? OR LOWER(COALESCE(phone,'')) LIKE ?
        OR LOWER(COALESCE(email,'')) LIKE ? OR LOWER(COALESCE(company,'')) LIKE ?
-     ORDER BY name COLLATE NOCASE ASC`,
+     ORDER BY LOWER(name) ASC`,
     [term, term, term, term, term]
   );
 }
@@ -66,7 +66,8 @@ export async function getClient(id: number): Promise<Client | null> {
 
 export async function listMaterials(): Promise<Material[]> {
   await ensureDb();
-  return query<Material>("SELECT * FROM materials ORDER BY name COLLATE NOCASE ASC, color ASC");
+  // LOWER() funciona nos dois bancos (COLLATE NOCASE é exclusivo do SQLite).
+  return query<Material>("SELECT * FROM materials ORDER BY LOWER(name) ASC, LOWER(color) ASC");
 }
 
 export async function listQuotes(options?: {
