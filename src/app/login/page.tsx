@@ -47,7 +47,7 @@ export default async function LoginPage() {
           </ul>
         </div>
 
-        <p className="relative text-[11px] font-medium text-white/30">
+        <p className="relative text-[11px] font-medium text-white/55">
           Fábrica Da Impressão 3D — Orçamentos válidos por 7 dias.
         </p>
       </div>
@@ -59,12 +59,12 @@ export default async function LoginPage() {
             <BrandMark />
             <div className="leading-tight">
               <p className="text-sm font-extrabold uppercase tracking-wide text-ink">Fábrica Da</p>
-              <p className="text-sm font-extrabold uppercase tracking-wide text-brand">Impressão 3D</p>
+              <p className="text-sm font-extrabold uppercase tracking-wide text-brand-dark">Impressão 3D</p>
             </div>
           </div>
 
           <h2 className="text-2xl font-extrabold text-ink">Acesso administrativo</h2>
-          <p className="mt-1 text-sm font-medium text-ink/50">
+          <p className="mt-1 text-sm font-medium text-ink/65">
             Entre com suas credenciais para gerenciar orçamentos.
           </p>
 
@@ -74,7 +74,7 @@ export default async function LoginPage() {
             </Suspense>
           </div>
 
-          <p className="mt-6 text-center text-[11px] font-medium text-ink/35">
+          <p className="mt-6 text-center text-[11px] font-medium text-ink/65">
             Acesso restrito. Todas as alterações são registradas em log.
           </p>
         </div>

@@ -19,11 +19,11 @@ export default async function EditarOrcamentoPage({ params }: { params: Promise<
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-dark">
           Orçamento #{String(quote.id).padStart(4, "0")}
         </p>
         <h1 className="mt-1 text-2xl font-extrabold sm:text-3xl">Editar orçamento</h1>
-        <p className="mt-1 text-sm font-medium text-ink/50">
+        <p className="mt-1 text-sm font-medium text-ink/65">
           Ao salvar, todos os cálculos são refeitos com as configurações atuais.
         </p>
       </header>

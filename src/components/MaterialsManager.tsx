@@ -83,11 +83,11 @@ export default function MaterialsManager({ materials }: { materials: Material[] 
             <div className="flex items-start justify-between gap-2">
               <div>
                 <p className="text-sm font-extrabold">{material.name}</p>
-                <p className="text-[11px] font-semibold text-ink/40">{material.color || "Cor não informada"}</p>
+                <p className="text-[11px] font-semibold text-ink/65">{material.color || "Cor não informada"}</p>
               </div>
-              <span className="badge bg-brand/10 text-brand">{brl(material.price_per_kg)}/kg</span>
+              <span className="badge bg-brand/10 text-brand-dark">{brl(material.price_per_kg)}/kg</span>
             </div>
-            <div className="mt-3 flex items-center justify-between border-t border-ink/10 pt-3 text-[11px] font-semibold text-ink/50">
+            <div className="mt-3 flex items-center justify-between border-t border-ink/10 pt-3 text-[11px] font-semibold text-ink/65">
               <span>Estoque: {grams(material.stock_g)}</span>
               <div className="flex gap-1.5">
                 <button onClick={() => openEdit(material)} className="btn-ghost px-2 py-1 text-[11px]">
@@ -98,7 +98,7 @@ export default function MaterialsManager({ materials }: { materials: Material[] 
                 </button>
               </div>
             </div>
-            <p className="mt-2 text-[10px] font-medium text-ink/35">
+            <p className="mt-2 text-[10px] font-medium text-ink/65">
               Custo por grama: {brl(material.price_per_kg / 1000)}
             </p>
           </div>
@@ -109,7 +109,7 @@ export default function MaterialsManager({ materials }: { materials: Material[] 
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/60 backdrop-blur-sm sm:items-center sm:p-4">
           <div className="w-full max-w-md rounded-t-2xl bg-white p-5 shadow-2xl sm:rounded-2xl sm:p-6">
             <h2 className="text-lg font-extrabold">{editing ? "Editar material" : "Novo material"}</h2>
-            <p className="mt-0.5 text-xs font-medium text-ink/45">
+            <p className="mt-0.5 text-xs font-medium text-ink/65">
               O valor por Kg alimenta automaticamente o custo de material dos orçamentos.
             </p>
 
@@ -123,7 +123,7 @@ export default function MaterialsManager({ materials }: { materials: Material[] 
                       key={preset}
                       type="button"
                       onClick={() => setValue("name", preset)}
-                      className="rounded-full bg-cloud px-2.5 py-1 text-[11px] font-bold text-ink/60 hover:bg-brand/15 hover:text-brand"
+                      className="rounded-full bg-cloud px-2.5 py-1 text-[11px] font-bold text-ink/60 hover:bg-brand/15 hover:text-brand-dark"
                     >
                       {preset}
                     </button>
@@ -143,7 +143,7 @@ export default function MaterialsManager({ materials }: { materials: Material[] 
               <div>
                 <label className="label">Estoque (g)</label>
                 <input type="number" min={0} step="1" className="input" placeholder="1000" {...register("stock_g")} />
-                <p className="mt-1 text-[10px] font-medium text-ink/35">
+                <p className="mt-1 text-[10px] font-medium text-ink/65">
                   {num(Number(0), 0)}
                 </p>
               </div>

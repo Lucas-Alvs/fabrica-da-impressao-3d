@@ -145,7 +145,7 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
       <div className="space-y-5">
         <section className="card p-4 sm:p-6">
           <h2 className="text-base font-extrabold">Cliente</h2>
-          <p className="mt-0.5 text-xs font-medium text-ink/45">
+          <p className="mt-0.5 text-xs font-medium text-ink/65">
             Escolha um cliente cadastrado ou preencha os dados manualmente.
           </p>
 
@@ -186,7 +186,7 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
 
         <section className="card p-4 sm:p-6">
           <h2 className="text-base font-extrabold">Dados da peça</h2>
-          <p className="mt-0.5 text-xs font-medium text-ink/45">
+          <p className="mt-0.5 text-xs font-medium text-ink/65">
             Informe peso, tempo de impressão e quantidade para o cálculo automático.
           </p>
 
@@ -220,11 +220,11 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
                 <label className="label">Tempo da peça</label>
                 <div className="flex items-center gap-2">
                   <input type="number" min={0} step={1} className="input" placeholder="3" {...register("hours_h")} />
-                  <span className="text-xs font-bold text-ink/40">h</span>
+                  <span className="text-xs font-bold text-ink/65">h</span>
                   <input type="number" min={0} max={59} step={1} className="input" placeholder="30" {...register("hours_min")} />
-                  <span className="text-xs font-bold text-ink/40">min</span>
+                  <span className="text-xs font-bold text-ink/65">min</span>
                 </div>
-                <p className="mt-1 text-[11px] font-semibold text-ink/40">
+                <p className="mt-1 text-[11px] font-semibold text-ink/65">
                   {hours > 0 ? hoursLabel(hours) : "Informe as horas e os minutos"}
                 </p>
               </div>
@@ -261,9 +261,9 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
       <div className="space-y-5 lg:sticky lg:top-6 lg:self-start">
         <section className="card overflow-hidden">
           <div className="bg-ink px-5 py-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">Valor do orçamento</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Valor do orçamento</p>
             <p className="mt-1 text-3xl font-extrabold text-white">{brl(calc.total)}</p>
-            <p className="mt-1 text-[11px] font-semibold text-white/45">
+            <p className="mt-1 text-[11px] font-semibold text-white/55">
               {quantity} peça(s) • {brl(calc.effectiveUnitPrice)} por unidade
             </p>
           </div>
@@ -273,7 +273,7 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
               <div key={label} className="flex items-baseline justify-between gap-3">
                 <div>
                   <p className="text-[13px] font-semibold text-ink/70">{label}</p>
-                  <p className="text-[10px] font-medium text-ink/35">{hint}</p>
+                  <p className="text-[10px] font-medium text-ink/65">{hint}</p>
                 </div>
                 <p className="font-bold text-ink">{brl(value)}</p>
               </div>
@@ -282,7 +282,7 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
               <span>Custo por peça</span>
               <span>{brl(calc.unitCost)}</span>
             </div>
-            <div className="flex justify-between text-[13px] font-extrabold text-brand">
+            <div className="flex justify-between text-[13px] font-extrabold text-brand-dark">
               <span>Preço de venda unitário</span>
               <span>{brl(calc.unitPrice)}</span>
             </div>
@@ -327,7 +327,7 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
               <p className="text-[12px] font-semibold text-ink/60">
                 A partir de 50 peças o desconto de lote é aplicado automaticamente.
               </p>
-              <ul className="mt-2 space-y-1 text-[11px] font-semibold text-ink/45">
+              <ul className="mt-2 space-y-1 text-[11px] font-semibold text-ink/65">
                 {tiers.map((tier) => (
                   <li key={tier.id} className="flex justify-between gap-2">
                     <span>{tierLabel(tier)}</span>
@@ -344,11 +344,11 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
           <h3 className="text-sm font-extrabold">Comparação de preço</h3>
           <dl className="mt-3 space-y-2 text-[12px] font-semibold">
             <div className="flex justify-between">
-              <dt className="text-ink/55">Preço unitário</dt>
+              <dt className="text-ink/65">Preço unitário</dt>
               <dd>{brl(calc.unitPrice)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-ink/55">Preço em lote (por peça)</dt>
+              <dt className="text-ink/65">Preço em lote (por peça)</dt>
               <dd>{brl(calc.effectiveUnitPrice)}</dd>
             </div>
             <div className="flex justify-between text-emerald-700">
@@ -365,7 +365,7 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
         {/* Produção em massa */}
         <section className="card p-5">
           <h3 className="text-sm font-extrabold">Otimização de produção</h3>
-          <p className="mt-0.5 text-[11px] font-medium text-ink/45">
+          <p className="mt-0.5 text-[11px] font-medium text-ink/65">
             {piecesPerPlate} peça(s) por mesa • {quantity} peças solicitadas
           </p>
           <dl className="mt-3 grid grid-cols-2 gap-2 text-[12px] font-semibold">
@@ -378,7 +378,7 @@ export default function QuoteForm({ clients, materials, settings, tiers, quote, 
               ["Lucro total", brl(calc.totalProfit)]
             ].map(([label, value]) => (
               <div key={label} className="rounded-lg bg-cloud/70 px-2.5 py-2">
-                <dt className="text-[9px] font-bold uppercase tracking-wide text-ink/40">{label}</dt>
+                <dt className="text-[9px] font-bold uppercase tracking-wide text-ink/65">{label}</dt>
                 <dd className="mt-0.5 text-[12px] font-extrabold text-ink">{value}</dd>
               </div>
             ))}

@@ -12,9 +12,9 @@ export default async function MateriaisPage() {
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">Estoque</p>
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-dark">Estoque</p>
         <h1 className="mt-1 text-2xl font-extrabold sm:text-3xl">Materiais</h1>
-        <p className="mt-1 text-sm font-medium text-ink/50">
+        <p className="mt-1 text-sm font-medium text-ink/65">
           {materials.length} material(is) • {grams(stock)} em estoque
         </p>
       </header>

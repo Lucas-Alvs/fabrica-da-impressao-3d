@@ -35,13 +35,13 @@
   }
 
   .label {
-    @apply mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-ink/50;
+    @apply mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-ink/65;
   }
 
   .input {
     @apply w-full rounded-xl border border-ink/10 bg-white px-3.5 py-2.5 text-sm font-medium text-ink
-      outline-none transition placeholder:font-normal placeholder:text-ink/30
-      focus:border-brand focus:ring-4 focus:ring-brand/10 disabled:bg-cloud disabled:text-ink/40;
+      outline-none transition placeholder:font-normal placeholder:text-ink/60
+      focus:border-brand focus:ring-4 focus:ring-brand/10 disabled:bg-cloud disabled:text-ink/60;
   }
 
   .btn {
@@ -50,7 +50,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-brand text-white shadow-glow hover:bg-brand-dark;
+    @apply btn bg-brand text-ink shadow-glow hover:bg-brand-light;
   }
 
   .btn-dark {
@@ -70,7 +70,7 @@
   }
 
   .table-head {
-    @apply border-b border-ink/10 bg-cloud/60 text-left text-[10px] font-bold uppercase tracking-wider text-ink/50;
+    @apply border-b border-ink/10 bg-cloud/60 text-left text-[10px] font-bold uppercase tracking-wider text-ink/65;
   }
 }
 

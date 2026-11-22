@@ -99,20 +99,20 @@ export default function ClientsManager({ clients, quoteCounts }: Props) {
               return (
                 <tr key={client.id} className="border-b border-ink/5 last:border-0 hover:bg-cloud/50">
                   <td className="px-3 py-2.5">
-                    <Link href={`/clientes/${client.id}`} className="font-bold hover:text-brand">
+                    <Link href={`/clientes/${client.id}`} className="font-bold hover:text-brand-dark">
                       {client.name}
                     </Link>
-                    <p className="text-[11px] font-medium text-ink/40">{client.company || "Pessoa física"}</p>
+                    <p className="text-[11px] font-medium text-ink/65">{client.company || "Pessoa física"}</p>
                   </td>
                   <td className="px-3 py-2.5">
                     <p className="font-semibold text-ink/70">{client.phone}</p>
-                    <p className="text-[11px] text-ink/40">{client.email || "—"}</p>
+                    <p className="text-[11px] text-ink/65">{client.email || "—"}</p>
                   </td>
                   <td className="px-3 py-2.5 text-right font-semibold">{stats?.count ?? 0}</td>
                   <td className="px-3 py-2.5 text-right font-extrabold">
                     {stats ? `R$ ${stats.total.toFixed(2).replace(".", ",")}` : "—"}
                   </td>
-                  <td className="px-3 py-2.5 text-ink/50">{stats?.last ? dateBR(stats.last) : "—"}</td>
+                  <td className="px-3 py-2.5 text-ink/65">{stats?.last ? dateBR(stats.last) : "—"}</td>
                   <td className="px-3 py-2.5">
                     <div className="flex flex-wrap justify-end gap-1.5">
                       <Link
@@ -140,7 +140,7 @@ export default function ClientsManager({ clients, quoteCounts }: Props) {
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/60 p-0 backdrop-blur-sm sm:items-center sm:p-4">
           <div className="w-full max-w-md rounded-t-2xl bg-white p-5 shadow-2xl sm:rounded-2xl sm:p-6">
             <h2 className="text-lg font-extrabold">{editing ? "Editar cliente" : "Novo cliente"}</h2>
-            <p className="mt-0.5 text-xs font-medium text-ink/45">
+            <p className="mt-0.5 text-xs font-medium text-ink/65">
               Os dados ficam vinculados aos orçamentos deste cliente.
             </p>
 

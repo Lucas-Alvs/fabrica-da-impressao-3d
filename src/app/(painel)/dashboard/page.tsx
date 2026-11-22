@@ -12,9 +12,9 @@ export default async function DashboardPage() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">Painel principal</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-dark">Painel principal</p>
           <h1 className="mt-1 text-2xl font-extrabold sm:text-3xl">Visão geral da produção</h1>
-          <p className="mt-1 text-sm font-medium text-ink/50">
+          <p className="mt-1 text-sm font-medium text-ink/65">
             {settings.printer_name} • {num(settings.printer_watts, 0)} W • vida útil de{" "}
             {num(settings.printer_life_hours, 0)} h
           </p>
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
       <SectionCard
         title="Últimos orçamentos"
         description="Os 6 registros mais recentes"
-        action={<Link href="/orcamentos" className="text-xs font-bold text-brand hover:underline">Ver todos</Link>}
+        action={<Link href="/orcamentos" className="text-xs font-bold text-brand-dark hover:underline">Ver todos</Link>}
       >
         {data.recentQuotes.length === 0 ? (
           <EmptyState
@@ -66,12 +66,12 @@ export default async function DashboardPage() {
                 {data.recentQuotes.map((quote) => (
                   <tr key={quote.id} className="border-b border-ink/5 last:border-0 hover:bg-cloud/50">
                     <td className="px-3 py-2.5 font-bold">
-                      <Link href={`/orcamentos/${quote.id}`} className="hover:text-brand">
+                      <Link href={`/orcamentos/${quote.id}`} className="hover:text-brand-dark">
                         {quote.project_name}
                       </Link>
                     </td>
                     <td className="px-3 py-2.5 text-ink/60">{quote.client_name}</td>
-                    <td className="px-3 py-2.5 text-ink/50">{dateBR(quote.created_at)}</td>
+                    <td className="px-3 py-2.5 text-ink/65">{dateBR(quote.created_at)}</td>
                     <td className="px-3 py-2.5 text-right font-semibold">{quote.quantity}</td>
                     <td className="px-3 py-2.5 text-right text-ink/60">{grams(quote.weight_g * quote.quantity)}</td>
                     <td className="px-3 py-2.5 text-right font-extrabold">{brl(quote.total)}</td>
@@ -81,7 +81,7 @@ export default async function DashboardPage() {
                           {quote.special_batch ? "Especial" : `${num(quote.discount_percent, 0)}%`}
                         </span>
                       ) : (
-                        <span className="text-[11px] font-semibold text-ink/30">—</span>
+                        <span className="text-[11px] font-semibold text-ink/60">—</span>
                       )}
                     </td>
                   </tr>
@@ -94,19 +94,19 @@ export default async function DashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Link href="/orcamentos/novo" className="card group p-5 transition hover:shadow-glow">
-          <p className="text-xs font-bold uppercase tracking-wider text-brand">Calculadora</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-brand-dark">Calculadora</p>
           <p className="mt-1 text-sm font-extrabold">Novo orçamento</p>
-          <p className="mt-1 text-xs font-medium text-ink/45">Calcule custos e preço em segundos.</p>
+          <p className="mt-1 text-xs font-medium text-ink/65">Calcule custos e preço em segundos.</p>
         </Link>
         <Link href="/clientes" className="card p-5 transition hover:shadow-glow">
-          <p className="text-xs font-bold uppercase tracking-wider text-brand">CRM</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-brand-dark">CRM</p>
           <p className="mt-1 text-sm font-extrabold">Clientes</p>
-          <p className="mt-1 text-xs font-medium text-ink/45">Histórico e contatos por cliente.</p>
+          <p className="mt-1 text-xs font-medium text-ink/65">Histórico e contatos por cliente.</p>
         </Link>
         <Link href="/configuracoes" className="card p-5 transition hover:shadow-glow">
-          <p className="text-xs font-bold uppercase tracking-wider text-brand">Ajustes</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-brand-dark">Ajustes</p>
           <p className="mt-1 text-sm font-extrabold">Configurações</p>
-          <p className="mt-1 text-xs font-medium text-ink/45">Impressora, energia, lucro e faixas.</p>
+          <p className="mt-1 text-xs font-medium text-ink/65">Impressora, energia, lucro e faixas.</p>
         </Link>
       </div>
     </div>

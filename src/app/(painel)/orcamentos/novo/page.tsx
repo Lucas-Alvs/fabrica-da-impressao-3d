@@ -19,9 +19,9 @@ export default async function NovoOrcamentoPage({
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">Calculadora de custos</p>
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-dark">Calculadora de custos</p>
         <h1 className="mt-1 text-2xl font-extrabold sm:text-3xl">Novo orçamento</h1>
-        <p className="mt-1 text-sm font-medium text-ink/50">
+        <p className="mt-1 text-sm font-medium text-ink/65">
           Os valores de custo, desconto de lote e preço final são calculados automaticamente.
         </p>
       </header>

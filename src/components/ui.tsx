@@ -17,15 +17,15 @@ export function StatCard({
   return (
     <div className="card p-4 sm:p-5">
       <div className="flex items-start justify-between gap-2">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-ink/45">{label}</p>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-ink/65">{label}</p>
         {icon ? (
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand/10 text-brand">{icon}</span>
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand/10 text-brand-dark">{icon}</span>
         ) : null}
       </div>
       <p className="mt-2 text-base font-extrabold leading-tight text-ink [overflow-wrap:normal] sm:text-lg">
         {value}
       </p>
-      {hint ? <p className="mt-1 text-xs font-medium text-ink/40">{hint}</p> : null}
+      {hint ? <p className="mt-1 text-xs font-medium text-ink/65">{hint}</p> : null}
     </div>
   );
 }
@@ -49,7 +49,7 @@ export function SectionCard({
         <header className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             {title ? <h2 className="text-base font-extrabold text-ink sm:text-lg">{title}</h2> : null}
-            {description ? <p className="mt-0.5 text-xs font-medium text-ink/45">{description}</p> : null}
+            {description ? <p className="mt-0.5 text-xs font-medium text-ink/65">{description}</p> : null}
           </div>
           {action}
         </header>
@@ -71,7 +71,7 @@ export function EmptyState({
   return (
     <div className="rounded-2xl border border-dashed border-ink/15 bg-cloud/50 px-6 py-10 text-center">
       <p className="text-sm font-bold text-ink">{title}</p>
-      <p className="mx-auto mt-1 max-w-sm text-xs font-medium text-ink/50">{description}</p>
+      <p className="mx-auto mt-1 max-w-sm text-xs font-medium text-ink/65">{description}</p>
       {action ? <div className="mt-4 flex justify-center">{action}</div> : null}
     </div>
   );

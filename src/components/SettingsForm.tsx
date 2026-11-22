@@ -70,7 +70,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
       {/* Impressora */}
       <section className="card p-4 sm:p-6">
         <h2 className="text-base font-extrabold">Impressora & energia</h2>
-        <p className="mt-0.5 text-xs font-medium text-ink/45">
+        <p className="mt-0.5 text-xs font-medium text-ink/65">
           Base do cálculo de energia e desgaste. Padrão: Bambu Lab A1 Mini (95 W, 10.000 h, R$ 2.000,00).
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -99,7 +99,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
             <input type="number" step="0.01" min={0} className="input" {...register("maintenance_per_hour")} />
           </div>
         </div>
-        <p className="mt-3 rounded-xl bg-cloud px-3 py-2 text-[11px] font-semibold text-ink/50">
+        <p className="mt-3 rounded-xl bg-cloud px-3 py-2 text-[11px] font-semibold text-ink/65">
           Desgaste calculado: {brl(wearPerHour)} por hora de impressão • energia:{" "}
           {brl((Number(values.printer_watts) / 1000) * Number(values.kwh_price))} por hora
         </p>
@@ -108,7 +108,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
       {/* Mão de obra e lucro */}
       <section className="card p-4 sm:p-6">
         <h2 className="text-base font-extrabold">Mão de obra, lucro e margem</h2>
-        <p className="mt-0.5 text-xs font-medium text-ink/45">
+        <p className="mt-0.5 text-xs font-medium text-ink/65">
           Escolha como a mão de obra e o lucro entram no preço final.
         </p>
 
@@ -159,7 +159,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
         <div className="mt-4 max-w-xs">
           <label className="label">Margem mínima de lucro (%)</label>
           <input type="number" step="0.1" min={0} className="input" {...register("min_margin_percent")} />
-          <p className="mt-1 text-[10px] font-medium text-ink/35">
+          <p className="mt-1 text-[10px] font-medium text-ink/65">
             O sistema nunca deixa o preço abaixo de custo + margem mínima.
           </p>
         </div>
@@ -170,7 +170,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
             <h2 className="text-base font-extrabold">Faixas de desconto por lote</h2>
-            <p className="mt-0.5 text-xs font-medium text-ink/45">
+            <p className="mt-0.5 text-xs font-medium text-ink/65">
               Aplicadas automaticamente conforme a quantidade de peças do orçamento.
             </p>
           </div>
@@ -266,7 +266,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
       {/* Empresa */}
       <section className="card p-4 sm:p-6">
         <h2 className="text-base font-extrabold">Identidade nos orçamentos</h2>
-        <p className="mt-0.5 text-xs font-medium text-ink/45">
+        <p className="mt-0.5 text-xs font-medium text-ink/65">
           Dados exibidos no cabeçalho e rodapé do PDF.
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -293,7 +293,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
           <div className="sm:col-span-2">
             <label className="label">E-mail de acesso ao painel</label>
             <input className="input" type="email" {...register("admin_email")} />
-            <p className="mt-1 text-[10px] font-medium text-ink/35">
+            <p className="mt-1 text-[10px] font-medium text-ink/65">
               Em produção, o e-mail definido em ADMIN_EMAIL tem prioridade sobre este campo.
             </p>
           </div>
@@ -317,7 +317,7 @@ export default function SettingsForm({ settings, tiers }: Props) {
         <a href="/api/backup" className="btn-ghost">
           ↓ Baixar backup do banco
         </a>
-        <span className="self-center text-[11px] font-semibold text-ink/35">
+        <span className="self-center text-[11px] font-semibold text-ink/65">
           Desgaste atual: {num(wearPerHour, 4)} R$/h
         </span>
       </div>

@@ -24,10 +24,10 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <Link href="/orcamentos" className="text-xs font-bold text-ink/45 hover:text-brand">
+        <Link href="/orcamentos" className="text-xs font-bold text-ink/65 hover:text-brand-dark">
           ← Voltar para orçamentos
         </Link>
-        <p className="text-[11px] font-semibold text-ink/40">
+        <p className="text-[11px] font-semibold text-ink/65">
           Criado em {dateTimeBR(quote.created_at)}
           {quote.pdf_generated_at ? ` • PDF gerado em ${dateTimeBR(quote.pdf_generated_at)}` : " • PDF ainda não gerado"}
         </p>
@@ -46,7 +46,7 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
                 <p className="text-sm font-extrabold uppercase tracking-wide text-white">
                   {settings.company_name}
                 </p>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
                   Impressão 3D • Prototipagem • Produção
                 </p>
               </div>
@@ -62,14 +62,14 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
           {/* Cliente e projeto */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl bg-cloud/80 p-4 ring-1 ring-inset ring-ink/5">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Cliente</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-ink/65">Cliente</p>
               <p className="mt-1 text-base font-extrabold">{quote.client_name || "Cliente não informado"}</p>
-              <p className="text-xs font-semibold text-ink/50">{quote.client_phone || "Telefone não informado"}</p>
+              <p className="text-xs font-semibold text-ink/65">{quote.client_phone || "Telefone não informado"}</p>
             </div>
             <div className="rounded-2xl bg-cloud/80 p-4 ring-1 ring-inset ring-ink/5">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Projeto</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-ink/65">Projeto</p>
               <p className="mt-1 text-base font-extrabold">{quote.project_name}</p>
-              <p className="text-xs font-semibold text-ink/50">
+              <p className="text-xs font-semibold text-ink/65">
                 {quote.material_label || "Material não informado"} • {grams(quote.weight_g)} por peça
               </p>
             </div>
@@ -104,13 +104,13 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
           {/* Resumo financeiro + total */}
           <div className="grid gap-4 lg:grid-cols-[1.2fr_1fr]">
             <div className="rounded-2xl bg-cloud p-4 sm:p-5">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-ink/65">
                 Resumo financeiro (por peça)
               </p>
               <dl className="mt-3 space-y-1.5 text-[13px]">
                 {costs.map(([label, value]) => (
                   <div key={label} className="flex justify-between gap-3">
-                    <dt className="font-semibold text-ink/55">{label}</dt>
+                    <dt className="font-semibold text-ink/65">{label}</dt>
                     <dd className="font-bold">{brl(value)}</dd>
                   </div>
                 ))}
@@ -123,12 +123,12 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
 
             <div className="relative overflow-hidden rounded-2xl bg-ink p-5">
               <div className="absolute inset-x-0 top-0 h-1 bg-brand" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">Valor total</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Valor total</p>
               <p className="mt-2 break-words text-3xl font-extrabold text-white">{brl(quote.total)}</p>
-              <p className="mt-2 text-[11px] font-semibold text-white/50">
+              <p className="mt-2 text-[11px] font-semibold text-white/60">
                 {brl(quote.unit_price)} por peça • {quote.quantity} peça(s)
               </p>
-              <p className="text-[11px] font-semibold text-white/35">
+              <p className="text-[11px] font-semibold text-white/55">
                 {quote.cycles} ciclo(s) de impressão • {hoursLabel(quote.cycles * quote.hours)} no total
               </p>
             </div>
@@ -163,7 +163,7 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
 
           {/* Produção */}
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Otimização de produção</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-ink/65">Otimização de produção</p>
             <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
               {[
                 ["Peças/mesa", String(quote.pieces_per_plate)],
@@ -174,7 +174,7 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
                 ["Lucro total", brl(quote.profit_unit * quote.quantity - quote.discount_value)]
               ].map(([label, value]) => (
                 <div key={label} className="rounded-xl bg-white px-3 py-2 ring-1 ring-inset ring-ink/10">
-                  <p className="text-[9px] font-bold uppercase tracking-wide text-ink/40">{label}</p>
+                  <p className="text-[9px] font-bold uppercase tracking-wide text-ink/65">{label}</p>
                   <p className="mt-0.5 text-[12px] font-extrabold">{value}</p>
                 </div>
               ))}
@@ -183,13 +183,13 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
 
           {/* Observações */}
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-ink/40">Observações</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-ink/65">Observações</p>
             <p className="mt-2 rounded-xl border border-ink/10 px-4 py-3 text-[13px] font-medium text-ink/60">
               {quote.notes?.trim() || `Orçamento válido por ${settings.quote_valid_days} dias. Prazo de produção a combinar.`}
             </p>
           </div>
 
-          <p className="border-t border-ink/10 pt-4 text-[11px] font-semibold text-ink/40">
+          <p className="border-t border-ink/10 pt-4 text-[11px] font-semibold text-ink/65">
             {settings.company_name} | Orçamento válido por {settings.quote_valid_days} dias
           </p>
         </div>
@@ -197,7 +197,7 @@ export default async function OrcamentoDetalhePage({ params }: { params: Promise
 
       <QuoteActions quote={quote} companyName={settings.company_name} />
 
-      <p className="text-[11px] font-medium text-ink/35">
+      <p className="text-[11px] font-medium text-ink/65">
         O envio por WhatsApp abre a conversa com a mensagem pronta e o telefone do cliente. Baixe o PDF e
         anexe na conversa para concluir o envio.
       </p>

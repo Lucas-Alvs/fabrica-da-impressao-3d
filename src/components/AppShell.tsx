@@ -84,7 +84,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <Link href="/orcamentos/novo" onClick={() => setOpen(false)} className="btn-primary w-full">
           + Novo orçamento
         </Link>
-        <button onClick={logout} className="w-full rounded-xl px-3 py-2 text-xs font-semibold text-white/45 transition hover:text-white">
+        <button onClick={logout} className="w-full rounded-xl px-3 py-2 text-xs font-semibold text-white/55 transition hover:text-white">
           Sair do painel
         </button>
       </div>

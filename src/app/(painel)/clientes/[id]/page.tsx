@@ -23,13 +23,13 @@ export default async function ClienteDetalhePage({ params }: { params: Promise<{
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/clientes" className="text-xs font-bold text-ink/45 hover:text-brand">
+        <Link href="/clientes" className="text-xs font-bold text-ink/65 hover:text-brand-dark">
           ← Voltar para clientes
         </Link>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h1 className="text-2xl font-extrabold sm:text-3xl">{client.name}</h1>
-            <p className="mt-1 text-sm font-medium text-ink/50">
+            <p className="mt-1 text-sm font-medium text-ink/65">
               {client.phone}
               {client.email ? ` • ${client.email}` : ""}
               {client.company ? ` • ${client.company}` : ""}
@@ -71,11 +71,11 @@ export default async function ClienteDetalhePage({ params }: { params: Promise<{
                 {quotes.map((quote) => (
                   <tr key={quote.id} className="border-b border-ink/5 last:border-0 hover:bg-cloud/50">
                     <td className="px-3 py-2.5 font-bold">
-                      <Link href={`/orcamentos/${quote.id}`} className="hover:text-brand">
+                      <Link href={`/orcamentos/${quote.id}`} className="hover:text-brand-dark">
                         {quote.project_name}
                       </Link>
                     </td>
-                    <td className="px-3 py-2.5 text-ink/50">{dateBR(quote.created_at)}</td>
+                    <td className="px-3 py-2.5 text-ink/65">{dateBR(quote.created_at)}</td>
                     <td className="px-3 py-2.5 text-right font-semibold">{quote.quantity}</td>
                     <td className="px-3 py-2.5 text-right font-extrabold">{brl(quote.total)}</td>
                     <td className="px-3 py-2.5">

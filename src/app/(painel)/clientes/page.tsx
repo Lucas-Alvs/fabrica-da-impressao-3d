@@ -26,9 +26,9 @@ export default async function ClientesPage({
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">Cadastro</p>
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-dark">Cadastro</p>
         <h1 className="mt-1 text-2xl font-extrabold sm:text-3xl">Clientes</h1>
-        <p className="mt-1 text-sm font-medium text-ink/50">
+        <p className="mt-1 text-sm font-medium text-ink/65">
           {clients.length} cliente(s) cadastrado(s) com histórico de orçamentos.
         </p>
       </header>

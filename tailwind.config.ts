@@ -8,7 +8,7 @@ const config: Config = {
         ink: "#111111",
         brand: {
           DEFAULT: "#FF6B00",
-          dark: "#E05E00",
+          dark: "#B54A00",
           light: "#FF8A33"
         },
         cloud: "#F3F3F3"

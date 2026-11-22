@@ -20,9 +20,9 @@ export default async function OrcamentosPage({
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand">Histórico</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-dark">Histórico</p>
           <h1 className="mt-1 text-2xl font-extrabold sm:text-3xl">Orçamentos</h1>
-          <p className="mt-1 text-sm font-medium text-ink/50">
+          <p className="mt-1 text-sm font-medium text-ink/65">
             {quotes.length} orçamento(s) • {brl(totalValue)} em valores finais
           </p>
         </div>
@@ -78,22 +78,22 @@ export default async function OrcamentosPage({
               <tbody>
                 {quotes.map((quote) => (
                   <tr key={quote.id} className="border-b border-ink/5 align-middle last:border-0 hover:bg-cloud/50">
-                    <td className="px-3 py-2.5 font-mono text-[11px] text-ink/40">
+                    <td className="px-3 py-2.5 font-mono text-[11px] text-ink/65">
                       {String(quote.id).padStart(4, "0")}
                     </td>
                     <td className="px-3 py-2.5 font-bold">
-                      <Link href={`/orcamentos/${quote.id}`} className="hover:text-brand">
+                      <Link href={`/orcamentos/${quote.id}`} className="hover:text-brand-dark">
                         {quote.project_name}
                       </Link>
-                      <p className="text-[11px] font-medium text-ink/40">{quote.material_label}</p>
+                      <p className="text-[11px] font-medium text-ink/65">{quote.material_label}</p>
                     </td>
                     <td className="px-3 py-2.5">
                       <p className="font-semibold text-ink/70">{quote.client_name}</p>
-                      <p className="text-[11px] text-ink/40">{quote.client_phone || "—"}</p>
+                      <p className="text-[11px] text-ink/65">{quote.client_phone || "—"}</p>
                     </td>
-                    <td className="px-3 py-2.5 text-ink/50">{dateBR(quote.created_at)}</td>
+                    <td className="px-3 py-2.5 text-ink/65">{dateBR(quote.created_at)}</td>
                     <td className="px-3 py-2.5 text-right font-semibold">{quote.quantity}</td>
-                    <td className="px-3 py-2.5 text-right text-ink/50">
+                    <td className="px-3 py-2.5 text-right text-ink/65">
                       {hoursLabel(quote.cycles * quote.hours)}
                     </td>
                     <td className="px-3 py-2.5 text-right font-extrabold">{brl(quote.total)}</td>
@@ -103,7 +103,7 @@ export default async function OrcamentosPage({
                           {quote.special_batch ? "Especial" : `${num(quote.discount_percent, 0)}%`}
                         </span>
                       ) : (
-                        <span className="text-[11px] font-semibold text-ink/30">—</span>
+                        <span className="text-[11px] font-semibold text-ink/60">—</span>
                       )}
                     </td>
                     <td className="px-3 py-2.5">
