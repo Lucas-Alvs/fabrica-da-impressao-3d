@@ -13,7 +13,12 @@ export const metadata: Metadata = {
   title: "Fábrica Da Impressão 3D — Orçamentos",
   description:
     "Sistema profissional de cálculo de custos, precificação em lote e orçamentos para impressão 3D.",
-  applicationName: "Fábrica Da Impressão 3D"
+  applicationName: "Fábrica Da Impressão 3D",
+  appleWebApp: {
+    capable: true,
+    title: "Fábrica 3D",
+    statusBarStyle: "black-translucent"
+  }
 };
 
 export const viewport: Viewport = {
