@@ -49,7 +49,7 @@ export default function LoginForm() {
           type="email"
           autoComplete="username"
           className="input"
-          placeholder="admin@fabrica3d.com"
+          placeholder="seu@email.com"
           {...register("email", { required: true })}
         />
       </div>
